@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UC Browser - Berkendara</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  body {
+    background: #f0f0f0;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff7a00, #ff9500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(255,122,0,0.35);
+  }
+
+  .brand-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #202124;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .brand-title .sep {
+    color: #ff7a00;
+    font-size: 14px;
+  }
+
+  .brand-sub {
+    font-size: 12px;
+    color: #5f6368;
+    margin-top: 2px;
+  }
+
+  .btn-aplikasi {
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 9px 22px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .btn-aplikasi:hover {
+    background: #2a2a2a;
+    transform: scale(1.03);
+  }
+
+  /* ===== MAIN CARD ===== */
+  .main-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 30px 16px;
+  }
+
+  .video-card {
+    width: 100%;
+    max-width: 700px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .uploader {
+    font-size: 15px;
+    font-weight: 600;
+    color: #202124;
+  }
+
+  .uploader .mask {
+    letter-spacing: 1px;
+  }
+
+  .laporkan {
+    font-size: 13px;
+    color: #8a8a8a;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .laporkan:hover {
+    color: #5f6368;
+  }
+
+  /* ===== VIDEO AREA ===== */
+  .video-area {
+    position: relative;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .video-area .bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(1.5px) brightness(0.85);
+    transform: scale(1.05);
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.28);
+    backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .play-btn::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 18px solid #ffffff;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    margin-left: 5px;
+  }
+
+  .see-app-btn {
+    position: absolute;
+    top: calc(50% + 46px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(60,60,60,0.85);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+  }
+
+  .see-app-btn:hover {
+    background: rgba(30,30,30,0.95);
+  }
+
+  .video-meta {
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  }
+
+  .video-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .video-info {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  /* ===== BOTTOM BAR ===== */
+  .bottom-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+    z-index: 50;
+  }
+
+  .download-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+
+  .download-btn:hover {
+    background: #f0f0f0;
+  }
+
+  .download-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #202124;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .see-uc-btn {
+    flex: 1;
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .see-uc-btn:hover {
+    background: #2a2a2a;
+  }
+
+  @media (max-width: 600px) {
+    .brand-title { font-size: 16px; }
+    .btn-aplikasi { padding: 8px 16px; font-size: 12px; }
+    .video-title { font-size: 15px; }
+    .see-uc-btn { font-size: 15px; padding: 13px 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">🐿️</div>
+      <div>
+        <div class="brand-title">
+          UC Browser <span class="sep">◆</span> Berkendara
+        </div>
+        <div class="brand-sub">Aman, Cepat, Pribadi</div>
+      </div>
+    </div>
+    <button class="btn-aplikasi">Aplikasi</button>
+  </header>
+
+  <!-- ===== MAIN CARD ===== -->
+  <main class="main-wrap">
+    <div class="video-card">
+
+      <div class="card-header">
+        <div class="uploader">
+          Dibagikan oleh As<span class="mask">t****inahh</span>
+        </div>
+        <a href="#" class="laporkan">Laporkan</a>
+      </div>
+
+      <div class="video-area">
+        <!-- Ganti src dengan thumbnail asli -->
+        <img class="bg-img"
+             src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?w=1200"
+             alt="thumbnail">
+
+        <button class="play-btn" aria-label="Play"></button>
+        <button class="see-app-btn">Lihat di aplikasi</button>
+
+        <div class="video-meta">
+          <div class="video-title">Baju Pink Cmlk Viral</div>
+          <div class="video-info">59MB&nbsp;&nbsp;&nbsp;00:05:00</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== BOTTOM BAR ===== -->
+  <div class="bottom-bar">
+    <button class="download-btn" aria-label="Download">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="see-uc-btn">Lihat di aplikasi UC</button>
+  </div>
+
+</body>
+</html>
