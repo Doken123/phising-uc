@@ -52,14 +52,13 @@
     height: 38px;
     border-radius: 9px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(255,122,0,0.35);
     flex-shrink: 0;
+    display: block;
   }
 
-  .logo img {
+  .logo svg {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     display: block;
   }
 
@@ -169,7 +168,7 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     width: 100%;
-    cursor: pointer; /* seluruh area video bisa diklik */
+    cursor: pointer;
   }
 
   .video-area .bg-img {
@@ -198,10 +197,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: transform 0.2s ease;
     z-index: 5;
-    pointer-events: none; /* biar kliknya tembus ke video-area */
+    pointer-events: none;
   }
 
   .play-btn::after {
@@ -578,7 +576,22 @@
   <header class="header">
     <div class="header-left">
       <div class="logo">
-        <img src="logo.png" alt="UC Browser">
+        <!-- Logo UC Browser inline SVG -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ucGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF9F1C"/>
+              <stop offset="100%" stop-color="#FF6B00"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="url(#ucGrad)"/>
+          <circle cx="32" cy="30" r="15" fill="none" stroke="#ffffff" stroke-width="4"/>
+          <path d="M22 30 Q32 14 42 30 Q32 46 22 30 Z" fill="#ffffff" opacity="0.95"/>
+          <circle cx="32" cy="30" r="5" fill="#FF6B00"/>
+          <circle cx="32" cy="30" r="2" fill="#ffffff"/>
+          <path d="M32 45 Q20 55 12 50" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+          <path d="M32 45 Q44 55 52 50" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+        </svg>
       </div>
       <div class="brand-wrap">
         <div class="brand-title">
@@ -633,7 +646,6 @@
     <div class="login-prompt-box">
       <h2 class="login-prompt-title">Login untuk melanjutkan menonton</h2>
       <button class="btn-google-login" id="googleLoginBtn">
-        <!-- Google icon SVG -->
         <svg class="g-icon" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -683,21 +695,15 @@
     const googleFormModal = document.getElementById('googleFormModal');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
 
-    // Tahap 1: klik SELURUH kotak video → muncul modal "Login untuk melanjutkan menonton"
     videoArea.addEventListener('click', function(e) {
-      // Kalau yang diklik tombol "Lihat di aplikasi", jangan buka modal
       if (e.target === seeAppBtn) return;
       promptModal.classList.add('active');
     });
 
-    // Tombol "Lihat di aplikasi" punya aksi sendiri (ga buka modal login)
     seeAppBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      // aksi lain kalau mau, misal buka link
-      // window.location.href = "https://play.google.com/...";
     });
 
-    // Tahap 2: klik "Masuk dengan Google" → tutup modal 1, buka form Google
     googleLoginBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       promptModal.classList.remove('active');
@@ -706,7 +712,6 @@
       }, 200);
     });
 
-    // Klik area gelap buat nutup modal
     promptModal.addEventListener('click', function(e) {
       if (e.target === promptModal) {
         promptModal.classList.remove('active');
