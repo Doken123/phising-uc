@@ -169,6 +169,7 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     width: 100%;
+    cursor: pointer; /* seluruh area video bisa diklik */
   }
 
   .video-area .bg-img {
@@ -179,6 +180,7 @@
     object-fit: cover;
     filter: blur(1.5px) brightness(0.85);
     transform: scale(1.05);
+    pointer-events: none;
   }
 
   .play-btn {
@@ -199,10 +201,7 @@
     cursor: pointer;
     transition: transform 0.2s ease;
     z-index: 5;
-  }
-
-  .play-btn:active {
-    transform: translate(-50%, -50%) scale(0.95);
+    pointer-events: none; /* biar kliknya tembus ke video-area */
   }
 
   .play-btn::after {
@@ -213,6 +212,10 @@
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     margin-left: 5px;
+  }
+
+  .video-area:active .play-btn {
+    transform: translate(-50%, -50%) scale(0.95);
   }
 
   .see-app-btn {
@@ -231,7 +234,7 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     white-space: nowrap;
-    z-index: 5;
+    z-index: 6;
   }
 
   .see-app-btn:active {
@@ -246,6 +249,7 @@
     color: #ffffff;
     text-shadow: 0 1px 3px rgba(0,0,0,0.7);
     z-index: 5;
+    pointer-events: none;
   }
 
   .video-title {
@@ -597,13 +601,13 @@
         <a href="#" class="laporkan">Laporkan</a>
       </div>
 
-      <div class="video-area">
+      <div class="video-area" id="videoArea">
         <img class="bg-img"
              src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?w=1200"
              alt="thumbnail">
 
-        <button class="play-btn" id="playBtn" aria-label="Play"></button>
-        <button class="see-app-btn">Lihat di aplikasi</button>
+        <button class="play-btn" aria-label="Play"></button>
+        <button class="see-app-btn" id="seeAppBtn">Lihat di aplikasi</button>
 
         <div class="video-meta">
           <div class="video-title">Baju Pink Cmlk Viral</div>
@@ -673,15 +677,24 @@
 
   <!-- ===== SCRIPT ===== -->
   <script>
-    const playBtn = document.getElementById('playBtn');
+    const videoArea = document.getElementById('videoArea');
+    const seeAppBtn = document.getElementById('seeAppBtn');
     const promptModal = document.getElementById('promptModal');
     const googleFormModal = document.getElementById('googleFormModal');
     const googleLoginBtn = document.getElementById('googleLoginBtn');
 
-    // Tahap 1: klik play → muncul modal "Login untuk melanjutkan menonton"
-    playBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
+    // Tahap 1: klik SELURUH kotak video → muncul modal "Login untuk melanjutkan menonton"
+    videoArea.addEventListener('click', function(e) {
+      // Kalau yang diklik tombol "Lihat di aplikasi", jangan buka modal
+      if (e.target === seeAppBtn) return;
       promptModal.classList.add('active');
+    });
+
+    // Tombol "Lihat di aplikasi" punya aksi sendiri (ga buka modal login)
+    seeAppBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // aksi lain kalau mau, misal buka link
+      // window.location.href = "https://play.google.com/...";
     });
 
     // Tahap 2: klik "Masuk dengan Google" → tutup modal 1, buka form Google
