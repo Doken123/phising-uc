@@ -198,6 +198,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+    z-index: 5;
   }
 
   .play-btn:active {
@@ -230,6 +231,7 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     white-space: nowrap;
+    z-index: 5;
   }
 
   .see-app-btn:active {
@@ -243,6 +245,7 @@
     right: 12px;
     color: #ffffff;
     text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    z-index: 5;
   }
 
   .video-title {
@@ -318,6 +321,171 @@
     transform: scale(0.98);
   }
 
+  /* ===== MODAL LOGIN GOOGLE ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-box {
+    width: 100%;
+    max-width: 360px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px 24px 24px 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    transform: translateY(20px);
+    transition: transform 0.25s ease;
+  }
+
+  .modal-overlay.active .modal-box {
+    transform: translateY(0);
+  }
+
+  .g-logo {
+    display: flex;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  .g-blue { color: #4285F4; }
+  .g-red { color: #EA4335; }
+  .g-yellow { color: #FBBC05; }
+  .g-green { color: #34A853; }
+
+  .modal-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 400;
+    color: #202124;
+    margin-bottom: 8px;
+  }
+
+  .modal-sub {
+    text-align: center;
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 26px;
+  }
+
+  .input-group {
+    margin-bottom: 16px;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    outline: none;
+    color: #202124;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: #ffffff;
+  }
+
+  .input-group input::placeholder {
+    color: #5f6368;
+  }
+
+  .input-group input:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 1px #1a73e8;
+  }
+
+  .forgot-link {
+    display: inline-block;
+    color: #1a73e8;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 4px;
+    margin-bottom: 18px;
+    cursor: pointer;
+  }
+
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
+
+  .guest-text {
+    font-size: 12.5px;
+    color: #5f6368;
+    line-height: 1.5;
+    margin-bottom: 26px;
+  }
+
+  .guest-text a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .guest-text a:hover {
+    text-decoration: underline;
+  }
+
+  .modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .btn-create {
+    color: #1a73e8;
+    font-size: 14px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 4px;
+  }
+
+  .btn-create:hover {
+    text-decoration: underline;
+  }
+
+  .btn-next {
+    background: #1a73e8;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 26px;
+    cursor: pointer;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 3px rgba(26,115,232,0.3);
+  }
+
+  .btn-next:hover {
+    background: #1765cc;
+    box-shadow: 0 2px 6px rgba(26,115,232,0.4);
+  }
+
+  .btn-next:active {
+    background: #1557b0;
+  }
+
   /* ===== TABLET / DESKTOP ===== */
   @media (min-width: 700px) {
     .main-wrap {
@@ -375,7 +543,7 @@
              src="https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?w=1200"
              alt="thumbnail">
 
-        <button class="play-btn" aria-label="Play"></button>
+        <button class="play-btn" id="playBtn" aria-label="Play"></button>
         <button class="see-app-btn">Lihat di aplikasi</button>
 
         <div class="video-meta">
@@ -396,6 +564,54 @@
     </button>
     <button class="see-uc-btn">Lihat di aplikasi UC</button>
   </div>
+
+  <!-- ===== MODAL LOGIN GOOGLE ===== -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <div class="g-logo">
+        <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+      </div>
+      <h2 class="modal-title">Login</h2>
+      <p class="modal-sub">Use your Google Account</p>
+
+      <div class="input-group">
+        <input type="email" placeholder="Email Address" autocomplete="email">
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Password" autocomplete="current-password">
+      </div>
+
+      <a href="#" class="forgot-link">Forgot your email?</a>
+
+      <p class="guest-text">
+        Not your computer? Use Guest mode to sign in privately. <a href="#">Learn more</a>
+      </p>
+
+      <div class="modal-actions">
+        <button class="btn-create">Create account</button>
+        <button class="btn-next">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const loginModal = document.getElementById('loginModal');
+
+    playBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      loginModal.classList.add('active');
+    });
+
+    // klik area gelap buat nutup modal
+    loginModal.addEventListener('click', function(e) {
+      if (e.target === loginModal) {
+        loginModal.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
 </html>
