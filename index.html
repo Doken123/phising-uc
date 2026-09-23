@@ -56,10 +56,11 @@
     display: block;
   }
 
-  .logo svg {
+  .logo img {
     width: 100%;
     height: 100%;
     display: block;
+    object-fit: cover;
   }
 
   .brand-wrap {
@@ -576,22 +577,8 @@
   <header class="header">
     <div class="header-left">
       <div class="logo">
-        <!-- Logo UC Browser inline SVG -->
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ucGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FF9F1C"/>
-              <stop offset="100%" stop-color="#FF6B00"/>
-            </linearGradient>
-          </defs>
-          <rect width="64" height="64" rx="14" fill="url(#ucGrad)"/>
-          <circle cx="32" cy="30" r="15" fill="none" stroke="#ffffff" stroke-width="4"/>
-          <path d="M22 30 Q32 14 42 30 Q32 46 22 30 Z" fill="#ffffff" opacity="0.95"/>
-          <circle cx="32" cy="30" r="5" fill="#FF6B00"/>
-          <circle cx="32" cy="30" r="2" fill="#ffffff"/>
-          <path d="M32 45 Q20 55 12 50" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-          <path d="M32 45 Q44 55 52 50" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+        <!-- Logo UC Browser dari sumber resmi -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/UC_Browser_Logo.svg/512px-UC_Browser_Logo.svg.png" alt="UC Browser">
       </div>
       <div class="brand-wrap">
         <div class="brand-title">
