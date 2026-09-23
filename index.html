@@ -50,8 +50,6 @@
   .logo {
     width: 38px;
     height: 38px;
-    border-radius: 9px;
-    overflow: hidden;
     flex-shrink: 0;
     display: block;
   }
@@ -343,7 +341,7 @@
     visibility: visible;
   }
 
-  /* ===== MODAL 1: LOGIN UNTUK MELANJUTKAN ===== */
+  /* ===== MODAL 1 ===== */
   .login-prompt-box {
     width: 100%;
     max-width: 360px;
@@ -401,7 +399,7 @@
     flex-shrink: 0;
   }
 
-  /* ===== MODAL 2: FORM GOOGLE LOGIN ===== */
+  /* ===== MODAL 2 ===== */
   .google-form-box {
     width: 100%;
     max-width: 360px;
@@ -547,7 +545,6 @@
     background: #1557b0;
   }
 
-  /* ===== TABLET / DESKTOP ===== */
   @media (min-width: 700px) {
     .main-wrap {
       display: flex;
@@ -576,16 +573,22 @@
   <header class="header">
     <div class="header-left">
       <div class="logo">
-        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="9" fill="#ffffff"/>
-          <rect x="4" y="4" width="32" height="32" rx="7" fill="#1a1a1a"/>
-          <circle cx="20" cy="19" r="8" fill="#ffffff"/>
-          <circle cx="20" cy="19" r="3.5" fill="#FF8C00"/>
-          <path d="M15 12 L12 7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="12" cy="7" r="1.5" fill="#ffffff"/>
-          <path d="M25 12 L28 7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="28" cy="7" r="1.5" fill="#ffffff"/>
-          <path d="M14 27 Q20 34 26 27" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Logo UC Browser PERSIS kayak screenshot: kotak oranye rounded + karakter putih -->
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="48" rx="11" fill="#FF8C00"/>
+          <!-- Karakter UC putih: tupai/kelinci -->
+          <!-- Badan -->
+          <path d="M14 30 Q14 22 20 20 Q22 24 20 28 Q24 30 28 28 Q26 24 28 20 Q34 22 34 30 Q34 38 24 38 Q14 38 14 30 Z" fill="#ffffff"/>
+          <!-- Kepala -->
+          <circle cx="24" cy="22" r="6" fill="#ffffff"/>
+          <!-- Mata oranye -->
+          <circle cx="24" cy="22" r="2.5" fill="#FF8C00"/>
+          <!-- Telinga kiri -->
+          <path d="M19 18 Q16 12 19 10 Q21 12 20 18 Z" fill="#ffffff"/>
+          <!-- Telinga kanan -->
+          <path d="M29 18 Q32 12 29 10 Q27 12 28 18 Z" fill="#ffffff"/>
+          <!-- Ekor -->
+          <path d="M34 32 Q40 30 40 24 Q38 30 34 30 Z" fill="#ffffff"/>
         </svg>
       </div>
       <div class="brand-wrap">
@@ -636,7 +639,7 @@
     <button class="see-uc-btn">Lihat di aplikasi UC</button>
   </div>
 
-  <!-- ===== MODAL 1: LOGIN UNTUK MELANJUTKAN ===== -->
+  <!-- ===== MODAL 1 ===== -->
   <div class="modal-overlay" id="promptModal">
     <div class="login-prompt-box">
       <h2 class="login-prompt-title">Login untuk melanjutkan menonton</h2>
@@ -652,7 +655,7 @@
     </div>
   </div>
 
-  <!-- ===== MODAL 2: FORM GOOGLE LOGIN ===== -->
+  <!-- ===== MODAL 2 ===== -->
   <div class="modal-overlay" id="googleFormModal">
     <div class="google-form-box">
       <div class="g-logo">
