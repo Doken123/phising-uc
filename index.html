@@ -56,10 +56,13 @@
     overflow: hidden;
   }
 
-  .logo svg {
+  /* ← LOGO PAKE GAMBAR logo.jpg */
+  .logo img {
     width: 100%;
     height: 100%;
     display: block;
+    object-fit: cover;
+    border-radius: 10px;
   }
 
   .brand-wrap {
@@ -562,28 +565,8 @@
   <header class="header">
     <div class="header-left">
       <div class="logo">
-        <!-- Logo UC Browser: tupai oranye di kotak oranye -->
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="48" rx="10" fill="#FF8C1A"/>
-          <!-- Tupai UC -->
-          <g fill="#ffffff">
-            <!-- Kepala -->
-            <ellipse cx="22" cy="22" rx="7" ry="7"/>
-            <!-- Telinga kiri -->
-            <path d="M16 17 Q14 11 17 9 Q19 11 18 17 Z"/>
-            <!-- Telinga kanan -->
-            <path d="M28 17 Q30 11 27 9 Q25 11 26 17 Z"/>
-            <!-- Badan -->
-            <path d="M15 24 Q15 34 22 36 Q29 34 29 24 Q26 26 22 26 Q18 26 15 24 Z"/>
-            <!-- Ekor mengembang -->
-            <path d="M29 26 Q36 24 38 18 Q40 22 38 28 Q36 34 32 34 Q30 32 29 28 Z"/>
-          </g>
-          <!-- Mata -->
-          <circle cx="20" cy="21" r="1.5" fill="#FF8C1A"/>
-          <circle cx="24" cy="21" r="1.5" fill="#FF8C1A"/>
-          <!-- Hidung -->
-          <circle cx="22" cy="24" r="1" fill="#FF8C1A"/>
-        </svg>
+        <!-- ← LOGO DARI FILE logo.jpg -->
+        <img src="logo.jpg" alt="UC Browser Logo">
       </div>
       <div class="brand-wrap">
         <div class="brand-title">
@@ -607,7 +590,6 @@
       </div>
 
       <div class="video-area" id="videoArea">
-        <!-- Thumbnail: gambar orang pake baju pink, di-blur -->
         <img class="bg-img"
              src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=1200"
              alt="thumbnail">
