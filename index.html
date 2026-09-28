@@ -18,6 +18,8 @@
     width: 100%;
     overflow-x: hidden;
     background: #ffffff;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -27,35 +29,32 @@
     position: relative;
   }
 
-  /* ===== HEADER — ZOOM OUT + GEDE ===== */
+  /* ===== HEADER — NEMPEL KE ATAS ===== */
   .header {
     background: #ffffff;
-    /* PADDING ATAS LEBIH GEDE biar garis hitam ke-cover */
-    padding: calc(22px + env(safe-area-inset-top)) 8px 10px 8px;
+    /* PADDING DIHAPUS TOTAL */
+    padding: 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     position: sticky;
     top: 0;
     z-index: 100;
     width: 100%;
     overflow: hidden;
+    line-height: 0;   /* ← biar ga ada gap default */
   }
 
-  /* Gambar header digedein & ga ada gap */
   .header img {
-    width: calc(100% + 8px);      /* ← lebih lebar dikit dari container */
-    margin-left: -4px;             /* ← geser kiri biar center */
+    width: 100%;
     height: auto;
-    display: block;
+    display: block;      /* ← hilangin gap default di bawah gambar */
     object-fit: contain;
-    /* Sedikit di-scale up biar keliatan gede */
-    transform: scale(1.06);
-    transform-origin: center center;
+    vertical-align: top;
   }
 
   /* ===== MAIN CARD ===== */
   .main-wrap {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 12px;
   }
 
   .video-card {
@@ -497,7 +496,7 @@
 </head>
 <body>
 
-  <!-- ===== HEADER — FULL GAMBAR, ZOOM OUT, GEDE ===== -->
+  <!-- ===== HEADER — NEMPEL KE ATAS ===== -->
   <header class="header">
     <img src="logo.jpg" alt="UC Browser - Berkendara">
   </header>
